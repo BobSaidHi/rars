@@ -39,12 +39,12 @@ public class MRET extends BasicInstruction {
     }
 
     public void simulate(ProgramStatement statement) {
-        boolean mpie = (ControlAndStatusRegisterFile.getValue("mstatus") & 0x10) == 0x10;
-        ControlAndStatusRegisterFile.clearRegister("mstatus", 0x10); // Clear MPIE
+        boolean mpie = (ControlAndStatusRegisterFile.getValue("mstatus") & 0x80) == 0x80;
+        ControlAndStatusRegisterFile.clearRegister("mstatus", 0x80); // Clear MPIE
         if (mpie) { // Set MIE to MPIE
-            ControlAndStatusRegisterFile.orRegister("mstatus", 0x1);
+            ControlAndStatusRegisterFile.orRegister("mstatus", 0x8);
         } else {
-            ControlAndStatusRegisterFile.clearRegister("mstatus", 0x1);
+            ControlAndStatusRegisterFile.clearRegister("mstatus", 0x8);
         }
         RegisterFile.setProgramCounter(ControlAndStatusRegisterFile.getValue("mepc"));
     }

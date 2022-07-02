@@ -45,7 +45,7 @@ public class ControlAndStatusRegisterFile {
     public static final int SOFTWARE_INTERRUPT = 0x1;
 
 
-    public static final int INTERRUPT_ENABLE = 0x1;
+    public static final int INTERRUPT_ENABLE = 0x8;
     
     private static final RegisterBlock instance;
 
@@ -64,7 +64,7 @@ public class ControlAndStatusRegisterFile {
                 new Register("ucause", 0x042, 0),
                 new Register("utval", 0x043, 0),
                 new Register("uip", 0x044, 0),
-                new MaskedRegister("mstatus", 0x300, 0,~0x11),
+                new MaskedRegister("mstatus", 0x300, 0,~0x88),
                 new Register("mie", 0x304, 0),
                 new Register("mtvec", 0x305, 0),
                 new Register("mscratch", 0x340, 0),

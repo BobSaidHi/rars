@@ -267,7 +267,7 @@ public class Simulator extends Observable {
             int base = mtvec & 0xFFFFFFFC;
 
             ProgramStatement exceptionHandler = null;
-            if ((ControlAndStatusRegisterFile.getValue("mstatus") & 0x1) != 0) { // test user-interrupt enable (MIE)
+            if ((ControlAndStatusRegisterFile.getValue("mstatus") & 0x8) != 0) { // test user-interrupt enable (MIE)
                 try {
                     exceptionHandler = Globals.memory.getStatement(base);
                 } catch (AddressErrorException aee) {
@@ -276,8 +276,8 @@ public class Simulator extends Observable {
             }
 
             if (exceptionHandler != null) {
-                ControlAndStatusRegisterFile.orRegister("mstatus", 0x10); // Set MPIE
-                ControlAndStatusRegisterFile.clearRegister("mstatus", 0x1); // Clear MIE
+                ControlAndStatusRegisterFile.orRegister("mstatus", 0x80); // Set MPIE
+                ControlAndStatusRegisterFile.clearRegister("mstatus", 0x8); // Clear MIE
                 RegisterFile.setProgramCounter(base);
                 return true;
             } else {
@@ -294,7 +294,7 @@ public class Simulator extends Observable {
             int code = cause & 0x7FFFFFFF;
 
             // Don't handle cases where that interrupt isn't enabled
-            assert ((ControlAndStatusRegisterFile.getValue("mstatus") & 0x1) != 0 && (ControlAndStatusRegisterFile.getValue("mie") & (1 << code)) != 0) : "The interrupt handler must be enabled";
+            assert ((ControlAndStatusRegisterFile.getValue("mstatus") & 0x8) != 0 && (ControlAndStatusRegisterFile.getValue("mie") & (1 << code)) != 0) : "The interrupt handler must be enabled";
 
             // set the relevant CSRs
             ControlAndStatusRegisterFile.updateRegister("mcause", cause);
@@ -317,7 +317,7 @@ public class Simulator extends Observable {
                 // handled below
             }
             if (exceptionHandler != null) {
-                ControlAndStatusRegisterFile.orRegister("mstatus", 0x10); // Set UPIE
+                ControlAndStatusRegisterFile.orRegister("mstatus", 0x80); // Set MPIE
                 ControlAndStatusRegisterFile.clearRegister("mstatus", ControlAndStatusRegisterFile.INTERRUPT_ENABLE);
                 RegisterFile.setProgramCounter(base);
                 return true;
