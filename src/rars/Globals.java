@@ -100,7 +100,7 @@ public class Globals {
     /**
      * The current version number. Can't wait for "initialize()" call to get it.
      */
-    public static final String version = "1.5";
+    public static final String version = "1.6";
     /**
      * List of accepted file extensions for RISCV assembly source files.
      */
@@ -164,11 +164,11 @@ public class Globals {
      * Method called once upon system initialization to create the global data structures.
      **/
 
-    public static void initialize(boolean gui) {
+    public static void initialize() {
         if (!initialized) {
             memory = Memory.getInstance();  //clients can use Memory.getInstance instead of Globals.memory
             symbolTable = new SymbolTable("global");
-            settings = new Settings(gui);
+            settings = new Settings();
             instructionSet = new InstructionSet();
             instructionSet.populate();
             initialized = true;

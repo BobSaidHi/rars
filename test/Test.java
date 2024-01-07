@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class Test {
     public static void main(String[] args){
-        Globals.initialize(false);
+        Globals.initialize();
         Globals.getSettings().setBooleanSettingNonPersistent(Settings.Bool.RV64_ENABLED,false);
         InstructionSet.rv64 = false;
         Globals.instructionSet.populate();
@@ -276,6 +276,7 @@ public class Test {
         }
         // 12 was the value when this test was written, if instructions are added that intentionally
         // don't have those registers in them add to the register list above or add to the count.
-        if(skips != 12) System.out.println("Unexpected number of psuedo-instructions skipped.");
+        // Updated to 10: because fsrmi and fsflagsi were removed
+        if(skips != 10) System.out.println("Unexpected number of psuedo-instructions skipped.");
     }
 }
