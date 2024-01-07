@@ -202,7 +202,7 @@ public class FileDumpMemoryAction extends GuiAction {
         ArrayList<DumpFormat> dumpFormats = DumpFormatLoader.getDumpFormats();
         formatListSelector = new JComboBox(dumpFormats.toArray());
         formatListSelector.setRenderer(new DumpFormatComboBoxRenderer(formatListSelector));
-        formatListSelector.setSelectedIndex(0);
+        formatListSelector.setSelectedIndex(3); // change defaulto to Hexadecimal Text
         JPanel formatPanel = new JPanel(new BorderLayout());
         formatPanel.add(new Label("Dump Format"), BorderLayout.NORTH);
         formatPanel.add(formatListSelector);
