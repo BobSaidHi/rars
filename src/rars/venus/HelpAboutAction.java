@@ -49,7 +49,7 @@ public class HelpAboutAction extends GuiAction {
                 "RARS " + Globals.version + "    Copyright " + Globals.copyrightYears + "\n" +
                         Globals.copyrightHolders + "\n" +
                         "RARS is the RISC-V Assembler and Runtime Simulator.\n\n" + 
-			"Modified for CPE 233 by Paul Hummel v1.0\n\n" +
+			"Modified for CPE 233 by Paul Hummel v1.1\n\n" +
 			"Toolbar and menu icons are from:\n" +
                         "  *  Tango Desktop Project (tango.freedesktop.org),\n" +
                         "  *  glyFX (www.glyfx.com) Common Toolbar Set,\n" +
