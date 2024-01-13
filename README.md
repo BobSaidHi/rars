@@ -7,7 +7,7 @@ an effective development environment for people getting started with RISC-V.
 
 ## Roadmap
 
-I despise the [JFileChooser dialog](https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/components/filechooser.html), mainly because it does not have a editable path box.  I intend to replace it with the [JavaFX FileDialog](https://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html) (if possible), which apears to use the native Windows Explorer Dialog on Windows.
+I despise the [JFileChooser dialog](https://docs.oracle.com/javase%2Ftutorial%2Fuiswing%2F%2F/components/filechooser.html), mainly because it does not have an editable path box.  I intend to replace it with the [JavaFX FileDialog](https://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html) (if possible), which apears to use the native Windows Explorer Dialog on Windows.
 
 ## Features
 
