@@ -400,7 +400,7 @@ public class Assembler {
                 //                   String substituted = macro.getSubstitutedLine(i, tokens, counter, errors);
                 //                   TokenList tokenList2 = fileCurrentlyBeingAssembled.getTokenizer().tokenizeLine(
                 //                      i, substituted, errors);
-                //                   // If token list getProcessedLine() is not empty, then .eqv was performed and it contains the modified source.
+                //                   // If token list getProcessedLine() is not empty, then .equ was performed and it contains the modified source.
                 //                	// Put it into the line to be parsed, so it will be displayed properly in text segment display. DPS 23 Jan 2013
                 //                   if (tokenList2.getProcessedLine().length() > 0)
                 //                      substituted = tokenList2.getProcessedLine();
@@ -416,7 +416,7 @@ public class Assembler {
                     TokenList tokenList2 = fileCurrentlyBeingAssembled.getTokenizer().tokenizeLine(
                             i, substituted, errors);
 
-                    // If token list getProcessedLine() is not empty, then .eqv was performed and it contains the modified source.
+                    // If token list getProcessedLine() is not empty, then .equ was performed and it contains the modified source.
                     // Put it into the line to be parsed, so it will be displayed properly in text segment display. DPS 23 Jan 2013
                     if (tokenList2.getProcessedLine().length() > 0)
                         substituted = tokenList2.getProcessedLine();

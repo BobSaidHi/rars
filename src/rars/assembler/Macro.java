@@ -201,7 +201,7 @@ public class Macro {
      */
 // Initially the position of the substitute was based on token position but that proved problematic
 // in that the source string does not always match the token list from which the token comes. The
-// token list has already had .eqv equivalences applied whereas the source may not.  This is because
+// token list has already had .equ equivalences applied whereas the source may not.  This is because
 // the source comes from a macro definition?  That has proven to be a tough question to answer. 
 // DPS 12-feb-2013
     private String replaceToken(String source, Token tokenToBeReplaced, String substitute) {
