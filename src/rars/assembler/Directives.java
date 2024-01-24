@@ -60,7 +60,7 @@ public final class Directives {
     public static final Directives GLOBL = new Directives(".globl", "Declare the listed label(s) as global to enable referencing from other files");
     public static final Directives GLOBAL = new Directives(".global", "Declare the listed label(s) as global to enable referencing from other files");
     /*  EQV added by DPS 11 July 2012 */
-    public static final Directives EQV = new Directives(".equ", "Substitute second operand for first. First operand is symbol, second operand is expression (like #define)");
+    public static final Directives EQU = new Directives(".equ", "Substitute second operand for first. First operand is symbol, second operand is expression (like #define)");
     /* MACRO and END_MACRO added by Mohammad Sekhavat Oct 2012 */
     public static final Directives MACRO = new Directives(".macro", "Begin macro definition.  See .end_macro");
     public static final Directives END_MACRO = new Directives(".end_macro", "End macro definition.  See .macro");
