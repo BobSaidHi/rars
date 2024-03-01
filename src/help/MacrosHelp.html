@@ -183,17 +183,17 @@ of source code, the macro definition
 line number will be displayed within brackets, e.g. "<tt>&lt;4&gt;</tt>", at the point of expansion.  Line numbers should correspond to the
 numbers you would see in the text editor. </p>
 
-<h3>The .eqv directive</h3>
-<p>The <tt>.eqv</tt> directive (short for "equivalence") is similar to <tt>#define</tt> in C or C++.  It 
+<h3>The .equ directive</h3>
+<p>The <tt>.equ</tt> directive (short for "equivalence") is similar to <tt>#define</tt> in C or C++.  It 
 is used to substitute an arbitrary string for an identifier.  It is useful but much less powerful than macros.  
 It was developed independently of the macro facility.
 </p>
-<p>Using <tt>.eqv</tt>, you can specify simple substitutions that provide "define once, use many times" capability at assembly 
+<p>Using <tt>.equ</tt>, you can specify simple substitutions that provide "define once, use many times" capability at assembly 
 pre-processing time.  For example, once you define
 <pre>
-       .eqv  LIMIT      20
-       .eqv  CTR        t2
-       .eqv  CLEAR_CTR  add  CTR, zero, 0</pre>
+       .equ  LIMIT      20
+       .equ  CTR        t2
+       .equ  CLEAR_CTR  add  CTR, zero, 0</pre>
 then you can refer to them in subsequent code:
 <pre>
        li a7,1
@@ -203,7 +203,7 @@ loop:  move a0, CTR
        add   CTR, CTR, 1
        blt   CTR, LIMIT, loop
        CLEAR_CTR</pre>
-During assembly pre-processing, the <tt>.eqv</tt> substitutions will be applied.  The resulting code is
+During assembly pre-processing, the <tt>.equ</tt> substitutions will be applied.  The resulting code is
 <pre>
        li   a7,1
        add  t2, zero, 0
@@ -214,8 +214,8 @@ loop:  move a0, t2
        add  t2, zero, 0</pre>
 which when run will display the values 0 through 19 on one line with no intervening spaces.
 </p>
-<p>Note that the substitution string is not limited to a single token.  Like <tt>.macro</tt>, <tt>.eqv</tt> is local to the file
-in which it is defined, and must be defined prior to use.  Macro bodies can contain references to <tt>.eqv</tt> directives.
+<p>Note that the substitution string is not limited to a single token.  Like <tt>.macro</tt>, <tt>.equ</tt> is local to the file
+in which it is defined, and must be defined prior to use.  Macro bodies can contain references to <tt>.equ</tt> directives.
  </p>
 
  <h3>The .include directive</h3>
@@ -223,7 +223,7 @@ in which it is defined, and must be defined prior to use.  Macro bodies can cont
  directive is carried out, the contents of the specified file are substituted for the directive.  This occurs
  during assembly preprocessing.  It is like <tt>#include</tt> in C or C++.</p>
  
- <p><tt>.include</tt> is designed to make  macro and equivalence (.eqv directive) use
+ <p><tt>.include</tt> is designed to make  macro and equivalence (.equ directive) use
  more convenient.  Both macro definitions and equivalence definitions are <i>local</i>, which means they can be used only
  in the same file where defined.  Without <tt>.include</tt>, you would have to repeat their definitions in every
  file where you want to use them.  Besides being tedious, this is poor programming practice; remember
@@ -278,7 +278,7 @@ value:		.word	 13
 <h3>Acknowledgements</h3>
 <p>All of the RARS macro functionality comes straight from MARS.The MARS macro facility was developed in 2012 by
 	Mohammad Hossein Sekhavat, sekhavat17@gmail.com, while an engineering student at Sharif University in Tehran.  MARS
-	creators Pete and Ken are incredibly grateful for his contribution!  Pete developed <tt>.eqv</tt> and <tt>.include</tt>
+	creators Pete and Ken are incredibly grateful for his contribution!  Pete developed <tt>.equ</tt> and <tt>.include</tt>
 	at about the same time.</p>
 
 <h3>References</h3>

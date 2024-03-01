@@ -102,9 +102,9 @@ public class Tokenizer {
             currentLineTokens = this.tokenizeLine(i + 1, sourceLine);
             tokenList.add(currentLineTokens);
             // DPS 03-Jan-2013. Related to 11-July-2012. If source code substitution was made
-            // based on .eqv directive during tokenizing, the processed line, a String, is
+            // based on .equ directive during tokenizing, the processed line, a String, is
             // not the same object as the original line.  Thus I can use != instead of !equals()
-            // This IF statement will replace original source with source modified by .eqv substitution.
+            // This IF statement will replace original source with source modified by .equ substitution.
             // Not needed by assembler, but looks better in the Text Segment Display.
             if (sourceLine.length() > 0 && sourceLine != currentLineTokens.getProcessedLine()) {
                 source.set(i, new SourceLine(currentLineTokens.getProcessedLine(), source.get(i).getRISCVprogram(), source.get(i).getLineNumber()));
@@ -249,7 +249,7 @@ public class Tokenizer {
      * @param lineNum          line number from source code (used in error message)
      * @param theLine          String containing source code
      * @param callerErrorList  errors will go into this list instead of tokenizer's list.
-     * @param doEqvSubstitutes boolean param set true to perform .eqv substitutions, else false
+     * @param doEqvSubstitutes boolean param set true to perform .equ substitutions, else false
      * @return the generated token list for that line
      **/
     public TokenList tokenizeLine(int lineNum, String theLine, ErrorList callerErrorList, boolean doEqvSubstitutes) {
@@ -268,7 +268,7 @@ public class Tokenizer {
      * @param program          RISCVprogram containing this line of source
      * @param lineNum          line number from source code (used in error message)
      * @param theLine          String containing source code
-     * @param doEqvSubstitutes boolean param set true to perform .eqv substitutions, else false
+     * @param doEqvSubstitutes boolean param set true to perform .equ substitutions, else false
      * @return the generated token list for that line
      **/
     public TokenList tokenizeLine(RISCVprogram program, int lineNum, String theLine, boolean doEqvSubstitutes) {
@@ -449,14 +449,14 @@ public class Tokenizer {
         return result;
     }
 
-    // Process the .eqv directive, which needs to be applied prior to tokenizing of subsequent statements.
-    // This handles detecting that theLine contains a .eqv directive, in which case it needs
+    // Process the .equ directive, which needs to be applied prior to tokenizing of subsequent statements.
+    // This handles detecting that theLine contains a .equ directive, in which case it needs
     // to be added to the HashMap of equivalents.  It also handles detecting that theLine
-    // contains a symbol that was previously defined in an .eqv directive, in which case
+    // contains a symbol that was previously defined in an .equ directive, in which case
     // the substitution needs to be made.
     // DPS 11-July-2012
     private TokenList processEqv(RISCVprogram program, int lineNum, String theLine, TokenList tokens) {
-        // See if it is .eqv directive.  If so, record it...
+        // See if it is .equ directive.  If so, record it...
         // Have to assure it is a well-formed statement right now (can't wait for assembler).
 
         if (tokens.size() > 2 && (tokens.get(0).getType() == TokenTypes.DIRECTIVE || tokens.get(2).getType() == TokenTypes.DIRECTIVE)) {
@@ -479,7 +479,7 @@ public class Tokenizer {
                 }
                 String symbol = tokens.get(dirPos + 1).getValue();
                 // Make sure the symbol is not contained in the expression.  Not likely to occur but if left
-                // undetected it will result in infinite recursion.  e.g.  .eqv ONE, (ONE)
+                // undetected it will result in infinite recursion.  e.g.  .equ ONE, (ONE)
                 for (int i = dirPos + 2; i < tokens.size(); i++) {
                     if (tokens.get(i).getValue().equals(symbol)) {
                         errors.add(new ErrorMessage(program, lineNum, tokens.get(dirPos).getStartPos(),
@@ -493,7 +493,7 @@ public class Tokenizer {
                 int startExpression = tokens.get(dirPos + 2).getStartPos();
                 int endExpression = tokens.get(tokenPosLastOperand).getStartPos() + tokens.get(tokenPosLastOperand).getValue().length();
                 String expression = theLine.substring(startExpression - 1, endExpression - 1);
-                // Symbol cannot be redefined - the only reason for this is to act like the Gnu .eqv
+                // Symbol cannot be redefined - the only reason for this is to act like the Gnu .equ
                 if (equivalents.containsKey(symbol) && !equivalents.get(symbol).equals(expression)) {
                     errors.add(new ErrorMessage(program, lineNum, tokens.get(dirPos + 1).getStartPos(),
                             "\"" + symbol + "\" is already defined"));
@@ -503,7 +503,7 @@ public class Tokenizer {
                 return tokens;
             }
         }
-        // Check if a substitution from defined .eqv is to be made.  If so, make one.
+        // Check if a substitution from defined .equ is to be made.  If so, make one.
         boolean substitutionMade = false;
         for (int i = 0; i < tokens.size(); i++) {
             Token token = tokens.get(i);
